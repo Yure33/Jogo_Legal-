@@ -58,6 +58,8 @@ public class ShopUI : MonoBehaviour
             
             // carrega a imagem do SO no botao
             item.botao.image.sprite = item.dadosUpgrade.iconeUpgrade;
+
+            item.botao.image.preserveAspect = true;
             
             // Busca todos os textos filhos do botão
             TMP_Text[] textos = item.botao.GetComponentsInChildren<TMP_Text>();

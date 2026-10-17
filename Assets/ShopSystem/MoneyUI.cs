@@ -47,9 +47,11 @@ public class MoneyUI : MonoBehaviour
     }
 
     private void GerarPopup(int diferenca) {
-        if (prefabTextoFlutuante == null) return;
+        if (prefabTextoFlutuante == null || pontoDeNascimentoPopup == null) return;
 
         TMP_Text popup = Instantiate(prefabTextoFlutuante, pontoDeNascimentoPopup);
+        
+        popup.rectTransform.localPosition = Vector3.zero;
         
         if (diferenca > 0) {
             popup.text = $"+{diferenca}";

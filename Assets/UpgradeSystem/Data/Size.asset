@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
   nome: Size
   valor: 
-  tipo: 0
+  tipo: 1
   valorEfeito: []
   iconeUpgrade: {fileID: 0}
