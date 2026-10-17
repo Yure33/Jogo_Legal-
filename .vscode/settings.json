@@ -67,6 +67,9 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "DevU-TemplateProject.slnx",
-    "dotnet.enableWorkspaceBasedDevelopment": false
+    "dotnet.defaultSolution": "Jogo_Legal-.slnx",
+    "dotnet.enableWorkspaceBasedDevelopment": false,
+    "dotrush.roslyn.projectOrSolutionFiles": [
+        "/home/yuri/Documentos/Games Dev-U/Jogo_Legal-/DevU-ProjectTemplate.slnx"
+    ]
 }
