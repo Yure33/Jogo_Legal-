@@ -5,6 +5,7 @@ public class BolaFogo_Script : MonoBehaviour
 {
     public static event Action fimDePartida;
     [SerializeField] Rigidbody2D fisica;
+    [SerializeField] int[] qntPerIndex;
     public Vector2 Direction;
     public float Velocity = 1;
     
