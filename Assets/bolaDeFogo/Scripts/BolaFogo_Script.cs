@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class BolaFogo_Script : MonoBehaviour
 {
+    public static event Action fimDePartida;
     [SerializeField] Rigidbody2D fisica;
     public Vector2 Direction;
     public float Velocity = 1;
@@ -15,5 +17,10 @@ public class BolaFogo_Script : MonoBehaviour
     {
         Debug.Log("Bati");
         Destroy(this.gameObject);
+    }
+
+    void OnDestroy()
+    {
+        fimDePartida?.Invoke();
     }
 }

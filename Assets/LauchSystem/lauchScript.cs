@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class lauchScript : MonoBehaviour
     [SerializeField] Transform mousePos, referenceDist, referenceMin;
     [SerializeField] Transform FuegoParent;
     [SerializeField] GameObject bolaDeFuego;
+    [SerializeField] HUD_Points_Script pointAlvo;
     bool isWaiting = true;
     public bool isHolding = false;
 
@@ -60,15 +62,25 @@ public class lauchScript : MonoBehaviour
             {
                 // ATIRARRRR
                 isWaiting = false;
-                
+
                 GameObject bola = Instantiate(bolaDeFuego, referenceDist.position, Quaternion.identity, 
                     FuegoParent);
                 bola.GetComponent<BolaFogo_Script>().Direction = dirToMouse;
+                pointAlvo.alvo = bola;
                 cams[0].Priority = 0;
                 cams[1].Priority = 1;
                 cams[1].Follow = bola.transform;
             }
             isHolding = false;
         }
+    }
+
+    public void ResetLauch()
+    {
+        isHolding = false;
+        isWaiting = true;
+        cams[0].Priority = 1;
+        cams[1].Priority = 0;
+        cams[1].transform.position = cams[0].transform.position;
     }
 }
