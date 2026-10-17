@@ -1,0 +1,19 @@
+using UnityEngine;
+
+public class BolaFogo_Script : MonoBehaviour
+{
+    [SerializeField] Rigidbody2D fisica;
+    public Vector2 Direction;
+    public float Velocity = 1;
+    
+    void Start()
+    {
+        fisica.AddForce(Direction*Velocity, ForceMode2D.Impulse);
+    }
+
+    void OnCollisionEnter2D(Collision2D cool)
+    {
+        Debug.Log("Bati");
+        Destroy(this.gameObject);
+    }
+}
