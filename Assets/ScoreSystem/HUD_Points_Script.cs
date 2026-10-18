@@ -23,10 +23,12 @@ public class HUD_Points_Script : MonoBehaviour
     void OnEnable()
     {
         BolaFogo_Script.fimDePartida += ShowEndHUD;
+        Obstacle.OnGetPoints += UpdateScore;
     }
     void OnDisable()
     {
         BolaFogo_Script.fimDePartida -= ShowEndHUD;
+        Obstacle.OnGetPoints -= UpdateScore;
     }
 
     void Start()
@@ -103,5 +105,10 @@ public class HUD_Points_Script : MonoBehaviour
         HUD_Sections[0].SetActive(true);
         HUD_Sections[1].SetActive(false);
         HUD_Sections[2].SetActive(false);
+    }
+
+    private void UpdateScore(int points)
+    {
+        Debug.Log("Pontos recebidos: " + points);
     }
 }
