@@ -21,6 +21,8 @@ public class HUD_Points_Script : MonoBehaviour
     [Header("Demais Referencias")]
     [SerializeField] GameObject[] HUD_Sections; 
     [SerializeField] lauchScript lauch;
+    [SerializeField] Animator livroAnime;
+    [SerializeField] GameObject lojaOBJ;
     float Distance = 0f;
     public GameObject alvo;
     public Vector2 distZero;
@@ -39,7 +41,7 @@ public class HUD_Points_Script : MonoBehaviour
 
     void Start()
     {
-        reachSlider.maxValue = TowerDistance;
+        //reachSlider.maxValue = TowerDistance;
         HUD_Sections[0].SetActive(true);
         HUD_Sections[1].SetActive(false);
         HUD_Sections[2].SetActive(false);
@@ -62,12 +64,21 @@ public class HUD_Points_Script : MonoBehaviour
         {
             shopCam.Priority = 2;
             lauch.enabled = false;
+            StartCoroutine(abrirLoja());
         }
         else
         {
             shopCam.Priority = 0;
             lauch.enabled = true;
+            livroAnime.SetBool("Abrido", false);
+            //StartCoroutine(fecharLoja());
         }
+    }
+
+    IEnumerator abrirLoja()
+    {
+        yield return new WaitUntil(() => lojaOBJ.activeSelf);
+        livroAnime.SetBool("Abrido", true);
     }
 
     void LateUpdate()
@@ -84,7 +95,7 @@ public class HUD_Points_Script : MonoBehaviour
             }
 
             Distance = Vector2.Distance(distZero, alvo.transform.position);
-            reachSlider.value = Distance;
+            //reachSlider.value = Distance;
             txtDistance.text = Distance.ToString("F0") + " m";
         }
     }
