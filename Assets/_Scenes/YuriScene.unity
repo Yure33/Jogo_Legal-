@@ -2662,7 +2662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &818574275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2732,6 +2732,9 @@ MonoBehaviour:
     - {fileID: 1753069235}
     - {fileID: 747722306}
     dadosUpgrade: {fileID: 11400000, guid: ab442e6761b96a248adad5bd32313f39, type: 2}
+  Can0Cant1_Buy:
+  - {r: 0.67058825, g: 0.12941177, b: 0.31764707, a: 1}
+  - {r: 0.21568629, g: 0.5372549, b: 0.1764706, a: 1}
 --- !u!1 &879510996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,7 +2947,7 @@ MonoBehaviour:
   - {fileID: 818574274}
   - {fileID: 1091352830}
   - {fileID: 364063895}
-  lauch: {fileID: 0}
+  lauch: {fileID: 1902123510}
   alvo: {fileID: 0}
   distZero: {x: 0, y: 0}
 --- !u!1 &958378471
@@ -3000,7 +3003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.67058825, g: 0.14117646, b: 0.31893763, a: 1}
+  m_Color: {r: 0.21535929, g: 0.5377358, b: 0.18009079, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3702,7 +3705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091352831
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3758,7 +3761,7 @@ RectTransform:
   m_Father: {fileID: 1801839110}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10453,7 +10456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1759294484
 MonoBehaviour:
   m_ObjectHideFlags: 0
