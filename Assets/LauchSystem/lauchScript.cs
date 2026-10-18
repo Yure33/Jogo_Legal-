@@ -52,12 +52,14 @@ public class lauchScript : MonoBehaviour
                     if(!isHolding) {
                         isHolding = true;
                         if(anim != null) anim.SetTrigger(hasStartLaunch);
+                        AudioManager.instance.PlaySound("PrepararBola");
                     }
                 }
                 else
                 {
                     if(isHolding){
                         if(anim != null) anim.SetTrigger(hasStopLaunch);
+                        AudioManager.instance.StopSound("PrepararBola");
                         isHolding = false;
                     }
                 }
@@ -65,6 +67,7 @@ public class lauchScript : MonoBehaviour
             else
             {
                 if(isHolding){
+                    AudioManager.instance.StopSound("PrepararBola");
                     if(anim != null) anim.SetTrigger(hasStopLaunch);
                     isHolding = false;
                 }
@@ -78,6 +81,9 @@ public class lauchScript : MonoBehaviour
                 // ATIRARRRR
                 isWaiting = false;
 
+                AudioManager.instance.StopSound("PrepararBola");
+                AudioManager.instance.PlaySound("LancarBola");
+
                 if(anim != null) anim.SetTrigger(hasStopLaunch);
 
                 GameObject bola = Instantiate(bolaDeFuego, referenceDist.position, Quaternion.identity, 
@@ -89,6 +95,7 @@ public class lauchScript : MonoBehaviour
                 cams[1].Follow = bola.transform;
             }else
             {
+                AudioManager.instance.StopSound("PrepararBola");
                 if(anim != null) anim.SetTrigger(hasStopLaunch);
             }
             isHolding = false;

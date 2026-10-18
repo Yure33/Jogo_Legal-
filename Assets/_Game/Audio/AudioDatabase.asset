@@ -12,4 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755551c0cd7fb2d4882e31b765f4fe7e, type: 3}
   m_Name: AudioDatabase
   m_EditorClassIdentifier: Assembly-CSharp::AudioDatabase
-  sounds: []
+  sounds:
+  - audioSource: {fileID: 0}
+    name: PrepararBola
+    clip: {fileID: 8300000, guid: 1baac91214e371241b47126b61a35a8b, type: 3}
+    volume: 0.5
+    pitch: 1.47
+    loop: 1
+  - audioSource: {fileID: 0}
+    name: LancarBola
+    clip: {fileID: 8300000, guid: d9bf2943612f8864aa8cca8dc01c5cd4, type: 3}
+    volume: 0.5
+    pitch: 1.61
+    loop: 0
+  - audioSource: {fileID: 0}
+    name: BolaBate
+    clip: {fileID: 8300000, guid: 4625b8b6b1f977c45a89f77e6d13b7a5, type: 3}
+    volume: 0.5
+    pitch: 0.1
+    loop: 0
+  - audioSource: {fileID: 0}
+    name: TntExplode
+    clip: {fileID: 8300000, guid: a7a5bd061c380d34b895dc140d9db5f0, type: 3}
+    volume: 0.5
+    pitch: 0.1
+    loop: 0
+  - audioSource: {fileID: 0}
+    name: EstrelaExplode
+    clip: {fileID: 8300000, guid: bf128c69d44468e44ab9d3cf7c5df5d2, type: 3}
+    volume: 0.5
+    pitch: 0
+    loop: 0
+  - audioSource: {fileID: 0}
+    name: Background
+    clip: {fileID: 0}
+    volume: 0.5
+    pitch: 1.47
+    loop: 1
