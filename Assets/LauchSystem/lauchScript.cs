@@ -1,16 +1,19 @@
-using System;
+using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class lauchScript : MonoBehaviour
 {
     [SerializeField] mouseScript MouseState;
     [SerializeField] CinemachineCamera[] cams;
-    [SerializeField] Transform mousePos, referenceDist, referenceMin;
+    [SerializeField] Transform mousePos, referenceDist, referenceMin, referenceMax;
     [SerializeField] Transform FuegoParent;
     [SerializeField] GameObject bolaDeFuego;
     [SerializeField] HUD_Points_Script pointAlvo;
-    bool isWaiting = true;
+    [SerializeField] SpriteRenderer circuloVisual;
+    [SerializeField] ParticleSystem circuloFechado;
+    bool isWaiting = true, circuloAtivo = false;
     public bool isHolding = false;
 
     Vector2 dirToMouse;
@@ -26,27 +29,41 @@ public class lauchScript : MonoBehaviour
         cams[0].Priority = 1;
         cams[1].Priority = 0;
     }
+    public void OnSummon(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            circuloVisual.transform.position = MouseState.transform.position;
+            this.transform.position = MouseState.transform.position;
+        }
+    }
     void Update()
     {
         if(!isWaiting && !isHolding)
         {
-
             return;
         }
 
-        dirToMouse = ((Vector2)mousePos.position - (Vector2)this.transform.position).normalized;
+        dirToMouse = ((Vector2)referenceDist.position - (Vector2)mousePos.position).normalized;
         if(MouseState.IsPressing)
         {
-            if(Vector2.Distance(this.transform.position, mousePos.position) < 
-                Vector2.Distance(this.transform.position, referenceDist.transform.position)
-                && (Vector2.Distance(this.transform.position, mousePos.position) > 
-                Vector2.Distance(this.transform.position, referenceMin.transform.position) || isHolding))
+            if(Vector2.Distance(referenceMax.position, mousePos.position) < 
+                Vector2.Distance(referenceMax.position, referenceDist.position)
+                && (Vector2.Distance(referenceMax.position, mousePos.position) > 
+                Vector2.Distance(referenceMax.position, referenceMin.position) || isHolding))
             {
                 // PODE GIRAR?
                 ang = Mathf.Atan2(dirToMouse.y, dirToMouse.x)*Mathf.Rad2Deg;
                 Debug.Log(ang);
                 if(ang >= 0 && ang <= 90)
                 {
+                    if(!circuloAtivo)
+                    {
+                        circuloVisual.DOKill();
+                        circuloVisual.DOFade(0.5f, 0.2f);
+                        MouseState.particulaSpawn.Play();
+                        circuloAtivo = true;
+                    }
                     this.transform.rotation = Quaternion.Euler(0, 0, ang);
 
                     if(!isHolding) {
@@ -60,6 +77,10 @@ public class lauchScript : MonoBehaviour
                     if(isHolding){
                         if(anim != null) anim.SetTrigger(hasStopLaunch);
                         AudioManager.instance.StopSound("PrepararBola");
+                        circuloVisual.DOKill();
+                        circuloVisual.DOFade(0, 0.2f);
+                        MouseState.particulaSpawn.Stop();
+                        circuloAtivo = false;
                         isHolding = false;
                     }
                 }
@@ -69,6 +90,10 @@ public class lauchScript : MonoBehaviour
                 if(isHolding){
                     AudioManager.instance.StopSound("PrepararBola");
                     if(anim != null) anim.SetTrigger(hasStopLaunch);
+                    circuloVisual.DOKill();
+                    circuloVisual.DOFade(0, 0.2f);
+                    MouseState.particulaSpawn.Stop();
+                    circuloAtivo = false;
                     isHolding = false;
                 }
             }
@@ -82,6 +107,7 @@ public class lauchScript : MonoBehaviour
                 isWaiting = false;
 
                 AudioManager.instance.StopSound("PrepararBola");
+                circuloFechado.Play();
                 AudioManager.instance.PlaySound("LancarBola");
 
                 if(anim != null) anim.SetTrigger(hasStopLaunch);
@@ -98,6 +124,10 @@ public class lauchScript : MonoBehaviour
                 AudioManager.instance.StopSound("PrepararBola");
                 if(anim != null) anim.SetTrigger(hasStopLaunch);
             }
+            circuloVisual.DOKill();
+            circuloVisual.DOFade(0, 0.2f);
+            MouseState.particulaSpawn.Stop();
+            circuloAtivo = false;
             isHolding = false;
         }
     }

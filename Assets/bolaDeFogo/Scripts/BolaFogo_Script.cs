@@ -16,9 +16,16 @@ public class BolaFogo_Script : MonoBehaviour
     void Start()
     {
         fisica.AddForce(Direction*Velocity, ForceMode2D.Impulse);
+        impulso.GenerateImpulse();
     }
-    void LateUpdate()
+    void FixedUpdate()
     {
+        if(fisica.linearVelocity.magnitude > 0)
+        {
+            float ang = Mathf.Atan2(fisica.linearVelocity.y, fisica.linearVelocity.x)* Mathf.Rad2Deg;
+            fisica.MoveRotation(ang);
+        }
+        
         if(fisica.linearVelocityX < 1)
         {
             ReciveDamage(Vida+50);
