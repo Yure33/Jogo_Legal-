@@ -13,7 +13,7 @@
         _ball = collider.GetComponent<BolaFogo_Script>();
         if(_ball != null)
         {
-            ObstacleData myData = dataObstacle.ObstacleList[_idData];
+            ObstacleData myData = dataObstacle.obstacleList[_idData];
 
             if (!string.IsNullOrEmpty(myData.SoundOnHit))
             {
@@ -43,7 +43,7 @@
         _ball = collision.gameObject.GetComponent<BolaFogo_Script>();
         if (_ball != null)
         {
-            ObstacleData myData = dataObstacle.ObstacleList[_idData];
+            ObstacleData myData = dataObstacle.obstacleList[_idData];
 
             if (!string.IsNullOrEmpty(myData.SoundOnHit))
             {

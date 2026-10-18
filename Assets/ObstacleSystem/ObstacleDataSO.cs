@@ -52,5 +52,5 @@ public class ObstacleData
 public class ObstacleDataSO : ScriptableObject {
     [Tooltip("Lista contendo as configurações de cada obstáculo")]
     [SerializeField] private ObstacleData[] _obstacleList;
-    public ObstacleData[] ObstacleList => _obstacleList;
+    public ObstacleData[] obstacleList => _obstacleList;
 }
