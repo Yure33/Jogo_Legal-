@@ -21,7 +21,7 @@
             }
 
             _ball.ApplyModifiers(myData.VelocityModifier, myData.HeightModifier);
-
+            _ball.IncreasePoints(_idData);
             _ball.ReciveDamage(0);
 
             if(myData.Points > 0) OnGetPoints?.Invoke(myData.Points);
