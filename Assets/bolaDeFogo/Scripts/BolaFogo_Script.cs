@@ -31,6 +31,35 @@ public class BolaFogo_Script : MonoBehaviour
         }
     }
 
+    public void ReciveDamage(float damage)
+    {
+        Vida -= damage;
+        if (impulso != null) impulso.GenerateImpulse();
+    }
+
+    public void DestroyBall()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void SlowDown(float slowFactor)
+    {
+        fisica.linearVelocity *= slowFactor;
+    }
+
+    public void Repulse(Vector2 collisionNormal, float repulseForce)
+    {
+        Vector2 directionReflected = Vector2.Reflect(fisica.linearVelocity.normalized, collisionNormal);
+        fisica.linearVelocity = Vector2.zero;
+        fisica.AddForce(directionReflected * repulseForce, ForceMode2D.Impulse);
+    }
+
+    public void Stop()
+    {
+        fisica.linearVelocity = Vector2.zero;
+        fisica.angularVelocity = 0f;
+    }
+
     void OnDestroy()
     {
         fimDePartida?.Invoke();
