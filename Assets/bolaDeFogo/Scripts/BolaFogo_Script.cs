@@ -30,6 +30,7 @@ public class BolaFogo_Script : MonoBehaviour
         Debug.Log("Bati");
         if(cool.gameObject.CompareTag("Ground"))
         {
+            AudioManager.instance.PlaySound("BolaBate");
             ReciveDamage(PerdaChao);
             fisica.linearVelocityX /= 1.25f;
             fisica.AddForce(Vector2.up*fisica.linearVelocity.magnitude/1.3f, ForceMode2D.Impulse);
