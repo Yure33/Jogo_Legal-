@@ -35,17 +35,17 @@ MonoBehaviour:
     name: TntExplode
     clip: {fileID: 8300000, guid: a7a5bd061c380d34b895dc140d9db5f0, type: 3}
     volume: 0.5
-    pitch: 0.1
+    pitch: 1
     loop: 0
   - audioSource: {fileID: 0}
     name: EstrelaExplode
     clip: {fileID: 8300000, guid: bf128c69d44468e44ab9d3cf7c5df5d2, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     loop: 0
   - audioSource: {fileID: 0}
     name: Background
     clip: {fileID: 0}
     volume: 0.5
-    pitch: 1.47
+    pitch: 1
     loop: 1
