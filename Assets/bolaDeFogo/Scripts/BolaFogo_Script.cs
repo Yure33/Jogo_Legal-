@@ -17,17 +17,26 @@ public class BolaFogo_Script : MonoBehaviour
     {
         fisica.AddForce(Direction*Velocity, ForceMode2D.Impulse);
     }
+    void LateUpdate()
+    {
+        if(fisica.linearVelocityX < 1)
+        {
+            ReciveDamage(Vida+50);
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D cool)
     {
         Debug.Log("Bati");
-        impulso.GenerateImpulse();
-        Vida -= PerdaChao;
-        fisica.linearVelocityX /= 1.25f;
-        fisica.AddForce(Vector2.up*fisica.linearVelocity.magnitude/1.3f, ForceMode2D.Impulse);
-        if(Vida <= 0)
+        if(cool.gameObject.CompareTag("Ground"))
         {
-            Destroy(this.gameObject);
+            ReciveDamage(PerdaChao);
+            fisica.linearVelocityX /= 1.25f;
+            fisica.AddForce(Vector2.up*fisica.linearVelocity.magnitude/1.3f, ForceMode2D.Impulse);
+            if(Vida <= 0 || fisica.linearVelocityX <= 1)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -35,6 +44,10 @@ public class BolaFogo_Script : MonoBehaviour
     {
         Vida -= damage;
         if (impulso != null) impulso.GenerateImpulse();
+        if(Vida <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void DestroyBall()

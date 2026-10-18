@@ -3,10 +3,16 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Unity.Cinemachine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class HUD_Points_Script : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI txtDistance, txtScore, txtSpecs;
+    [SerializeField] CinemachineCamera shopCam;
+    [Header("Slider References")]
+    [SerializeField] Slider reachSlider;
+    [SerializeField] int TowerDistance;
     [Header("Obstaculos e Points")]
     [SerializeField] string[] IndexNames;
     public int[] IndexQnt;
@@ -33,6 +39,7 @@ public class HUD_Points_Script : MonoBehaviour
 
     void Start()
     {
+        reachSlider.maxValue = TowerDistance;
         HUD_Sections[0].SetActive(true);
         HUD_Sections[1].SetActive(false);
         HUD_Sections[2].SetActive(false);
@@ -47,6 +54,19 @@ public class HUD_Points_Script : MonoBehaviour
         if(context.canceled)
         {
             podePassar = false;
+        }
+    }
+    public void EnterShop(int type)
+    {
+        if(type == 0)
+        {
+            shopCam.Priority = 2;
+            lauch.enabled = false;
+        }
+        else
+        {
+            shopCam.Priority = 0;
+            lauch.enabled = true;
         }
     }
 
@@ -64,6 +84,7 @@ public class HUD_Points_Script : MonoBehaviour
             }
 
             Distance = Vector2.Distance(distZero, alvo.transform.position);
+            reachSlider.value = Distance;
             txtDistance.text = Distance.ToString("F0") + " m";
         }
     }
@@ -101,10 +122,7 @@ public class HUD_Points_Script : MonoBehaviour
         yield return new WaitUntil(() => 
             podePassar
         );
-        lauch.ResetLauch();
-        HUD_Sections[0].SetActive(true);
-        HUD_Sections[1].SetActive(false);
-        HUD_Sections[2].SetActive(false);
+        TransitionEffect_Script.ChangeScene(SceneManager.GetActiveScene().name);
     }
 
     private void UpdateScore(int points)
