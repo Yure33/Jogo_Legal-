@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Fortune
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
   nome: Fortune
-  valor: 
+  valor: 640000009001000020030000
   tipo: 2
-  valorEfeito: []
-  iconeUpgrade: {fileID: 0}
+  valorEfeito:
+  - 1.15
+  - 1.4
+  - 1.8
+  iconeUpgrade: {fileID: 21300000, guid: c90964fffe2d0134ab440a119ff9344f, type: 3}

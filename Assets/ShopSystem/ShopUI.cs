@@ -7,6 +7,8 @@ using TMPro;
 public struct ItensLoja
 {
     public Button botao;
+    public Image Icon;
+    public TextMeshProUGUI[] textos;
     public UpgradeSO dadosUpgrade;
 }
 
@@ -57,42 +59,36 @@ public class ShopUI : MonoBehaviour
         foreach (ItensLoja item in itens) {
             
             // carrega a imagem do SO no botao
-            item.botao.image.sprite = item.dadosUpgrade.iconeUpgrade;
+            item.Icon.sprite = item.dadosUpgrade.iconeUpgrade;
+            item.Icon.preserveAspect = true;
 
-            item.botao.image.preserveAspect = true;
-            
-            // Busca todos os textos filhos do botão
-            TMP_Text[] textos = item.botao.GetComponentsInChildren<TMP_Text>();
+            // [0] O primeiro texto na hierarquia eh o Nome
+            item.textos[0].text = item.dadosUpgrade.nome;
 
-            // 3 textos no botao
-            if(textos.Length >= 3) {
-                // [0] O primeiro texto na hierarquia eh o Nome
-                textos[0].text = item.dadosUpgrade.nome;
-
-                // Consulta a memoria para saber o nivel atual
-                int nivelAtual = UpgradeManager.GetNivel(item.dadosUpgrade.tipo);
+            // Consulta a memoria para saber o nivel atual
+            int nivelAtual = UpgradeManager.GetNivel(item.dadosUpgrade.tipo);
                 
-                // [1] O segundo texto na hierarquia eh o Nivel (Ex: "Lvl 0/3")
-                textos[1].text = $"Lvl {nivelAtual}/{item.dadosUpgrade.nivelMaximo}";
+            // [1] O segundo texto na hierarquia eh o Nivel (Ex: "Lvl 0/3")
+            item.textos[1].text = $"Lvl {nivelAtual}/{item.dadosUpgrade.nivelMaximo}";
                 
-                // Verifica se chegou no limite máximo do upgrade
-                if (nivelAtual >= item.dadosUpgrade.nivelMaximo) {
-                    // [2] O terceiro texto eh o Preco, que vira MAX
-                    textos[2].text = "MAX";
-                    
-                    // Trava o botão e aplica um tom cinza escuro
-                    item.botao.interactable = false;
-                    item.botao.image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-                } 
-                else {
-                    // [2] Puxa o custo correto e atualiza o texto do Preço
-                    int custoAtual = item.dadosUpgrade.valor[nivelAtual];
-                    textos[2].text = $"$ {custoAtual}";
-                    
-                    // Libera o botão e volta para a cor normal (branco não altera o sprite)
-                    item.botao.interactable = true;
-                    item.botao.image.color = Color.white;
-                }
+            // Verifica se chegou no limite máximo do upgrade
+            if (nivelAtual >= item.dadosUpgrade.nivelMaximo) {
+                // [2] O terceiro texto eh o Preco, que vira MAX
+                item.textos[1].text = "Lvl. MAX";
+                item.textos[2].text = $"Já dominado";
+                
+                // Trava o botão e aplica um tom cinza escuro
+                item.botao.interactable = false;
+                item.botao.image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            } 
+            else {
+                // [2] Puxa o custo correto e atualiza o texto do Preço
+                int custoAtual = item.dadosUpgrade.valor[nivelAtual];
+                item.textos[2].text = $"$ {custoAtual}";
+                
+                // Libera o botão e volta para a cor normal (branco não altera o sprite)
+                item.botao.interactable = true;
+                item.botao.image.color = Color.white;
             }
         }
     }
