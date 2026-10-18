@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/_Scenes/MenuPrincipal.unity
     guid: 0caf6b83e1e9bd347a665e811a525af6
   - enabled: 1
+    path: Assets/_Scenes/_MainScene.unity
+    guid: f643ba197c5c7b147949b06c7577e664
+  - enabled: 0
     path: Assets/_Scenes/teste_pedrocardim.unity
     guid: 7f816515490b38d408ca199e086abc69
   m_configObjects:
