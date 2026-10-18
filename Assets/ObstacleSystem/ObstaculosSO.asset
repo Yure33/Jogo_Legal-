@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleDataSO
   _obstacleList:
   - _nameObstacle: Barril TNT
-    points: 0
+    points: 50
     indexObstacle: 0
     velocityModifier: 0.75
     heightModifier: 9
@@ -26,7 +26,7 @@ MonoBehaviour:
     vfxDestruicaoPrefab: {fileID: 7900110703093755869, guid: 68e6c2440f24843489951b028bea2e78, type: 3}
     soundOnHit: TntExplode
   - _nameObstacle: Passaros
-    points: 0
+    points: 100
     indexObstacle: 1
     velocityModifier: 0.75
     heightModifier: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     vfxDestruicaoPrefab: {fileID: 0}
     soundOnHit: 
   - _nameObstacle: Estrelas
-    points: 0
+    points: 1000
     indexObstacle: 3
     velocityModifier: 2
     heightModifier: 5
@@ -59,12 +59,12 @@ MonoBehaviour:
     velMinToBreak: 0
     repulseForce: 0
     slowFactor: 0
-    vfxDestruicaoPrefab: {fileID: 8279176134666631905, guid: a4e5d83f1b8ab524e98bfa95718e273f, type: 3}
+    vfxDestruicaoPrefab: {fileID: 0}
     soundOnHit: EstrelaExplode
   - _nameObstacle: Barreira Magica
     points: 0
     indexObstacle: 4
-    velocityModifier: -2
+    velocityModifier: 0.5
     heightModifier: 0
     destroyInTouch: 0
     damage: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
     vfxDestruicaoPrefab: {fileID: 0}
     soundOnHit: 
   - _nameObstacle: Balao
-    points: 0
+    points: 10
     indexObstacle: 5
     velocityModifier: 1
     heightModifier: 0
