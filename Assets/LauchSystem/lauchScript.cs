@@ -16,6 +16,11 @@ public class lauchScript : MonoBehaviour
     Vector2 dirToMouse;
     float ang;
 
+    //animacoes
+    [SerializeField] Animator anim;
+    private readonly int hasStartLaunch = Animator.StringToHash("StartLaunch"); 
+    private readonly int hasStopLaunch = Animator.StringToHash("StopLaunch");
+
     void Start()
     {
         cams[0].Priority = 1;
@@ -43,16 +48,26 @@ public class lauchScript : MonoBehaviour
                 if(ang >= 0 && ang <= 90)
                 {
                     this.transform.rotation = Quaternion.Euler(0, 0, ang);
-                    isHolding = true;
+
+                    if(!isHolding) {
+                        isHolding = true;
+                        if(anim != null) anim.SetTrigger(hasStartLaunch);
+                    }
                 }
                 else
                 {
-                    isHolding = false;
+                    if(isHolding){
+                        if(anim != null) anim.SetTrigger(hasStopLaunch);
+                        isHolding = false;
+                    }
                 }
             }
             else
             {
-                isHolding = false;
+                if(isHolding){
+                    if(anim != null) anim.SetTrigger(hasStopLaunch);
+                    isHolding = false;
+                }
             }
         }
         else if(isHolding)
@@ -63,6 +78,8 @@ public class lauchScript : MonoBehaviour
                 // ATIRARRRR
                 isWaiting = false;
 
+                if(anim != null) anim.SetTrigger(hasStopLaunch);
+
                 GameObject bola = Instantiate(bolaDeFuego, referenceDist.position, Quaternion.identity, 
                     FuegoParent);
                 bola.GetComponent<BolaFogo_Script>().Direction = dirToMouse;
@@ -70,6 +87,9 @@ public class lauchScript : MonoBehaviour
                 cams[0].Priority = 0;
                 cams[1].Priority = 1;
                 cams[1].Follow = bola.transform;
+            }else
+            {
+                if(anim != null) anim.SetTrigger(hasStopLaunch);
             }
             isHolding = false;
         }
