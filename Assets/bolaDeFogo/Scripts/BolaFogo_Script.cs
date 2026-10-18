@@ -78,6 +78,17 @@ public class BolaFogo_Script : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void ApplyModifiers(float speedMod, float heightMod)
+    {
+        Vector2 currentVelocity = fisica.linearVelocity;
+        currentVelocity.x *= speedMod; 
+        fisica.linearVelocity = currentVelocity;
+
+        if (heightMod != 0)
+        {
+            fisica.AddForce(new Vector2(0, heightMod), ForceMode2D.Impulse);
+        }
+    }
 
     public void DestroyBall()
     {
