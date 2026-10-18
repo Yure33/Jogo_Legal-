@@ -17,6 +17,8 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private GameObject painelShop;
     [SerializeField] ItensLoja[] itens;
 
+    [SerializeField] Color[] Can0Cant1_Buy;
+
     void Start() {
         foreach (ItensLoja item in itens) {
             item.botao.onClick.RemoveAllListeners();
@@ -79,7 +81,7 @@ public class ShopUI : MonoBehaviour
                 
                 // Trava o botão e aplica um tom cinza escuro
                 item.botao.interactable = false;
-                item.botao.image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                item.botao.image.color = Can0Cant1_Buy[1];
             } 
             else {
                 // [2] Puxa o custo correto e atualiza o texto do Preço
@@ -88,7 +90,7 @@ public class ShopUI : MonoBehaviour
                 
                 // Libera o botão e volta para a cor normal (branco não altera o sprite)
                 item.botao.interactable = true;
-                item.botao.image.color = Color.white;
+                item.botao.image.color = Can0Cant1_Buy[0];
             }
         }
     }

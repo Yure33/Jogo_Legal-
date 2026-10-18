@@ -10,31 +10,84 @@ public class BolaFogo_Script : MonoBehaviour
     [SerializeField] Rigidbody2D fisica;
     [SerializeField] int[] qntPerIndex;
     [SerializeField] CinemachineImpulseSource impulso;
+    [SerializeField] InvestidaScript investida;
+    [SerializeField] ParticleSystem particulaHIT;
     public Vector2 Direction;
     public float Velocity = 1;
+    float VelocidadeAntY;
     
     void Start()
     {
         fisica.AddForce(Direction*Velocity, ForceMode2D.Impulse);
+        impulso.GenerateImpulse();
+    }
+    void FixedUpdate()
+    {
+        if(fisica.linearVelocity.magnitude > 0)
+        {
+            float ang = Mathf.Atan2(fisica.linearVelocity.y, fisica.linearVelocity.x)* Mathf.Rad2Deg;
+            fisica.MoveRotation(ang);
+        }
+
+        if(fisica.linearVelocityX < 0.2f)
+        {
+            ReciveDamage(Vida+50);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D cool)
     {
         Debug.Log("Bati");
-        impulso.GenerateImpulse();
-        Vida -= PerdaChao;
-        fisica.linearVelocityX /= 1.25f;
-        fisica.AddForce(Vector2.up*fisica.linearVelocity.magnitude/1.3f, ForceMode2D.Impulse);
-        if(Vida <= 0)
+        if(cool.gameObject.CompareTag("Ground"))
         {
-            Destroy(this.gameObject);
+            AudioManager.instance.PlaySound("BolaBate");
+            if(investida.estaInvestindo)
+            {
+                fisica.linearVelocityX /= 1.05f;
+                fisica.AddForce(2 * Mathf.Abs(fisica.linearVelocityX*1.5f) * Vector2.up, ForceMode2D.Impulse);
+            }
+            else
+            {
+                fisica.linearVelocityX /= 1.25f;
+                fisica.AddForce(2 * Mathf.Abs(fisica.linearVelocityX) * Vector2.up, ForceMode2D.Impulse);
+            }
+
+            ReciveDamage(PerdaChao);
         }
     }
 
     public void ReciveDamage(float damage)
     {
-        Vida -= damage;
+        if(particulaHIT.isEmitting)
+        {
+            particulaHIT.Stop();
+        }
+        particulaHIT.Play();
+        
+        if(!investida.estaInvestindo)
+        {
+            Vida -= damage;
+        }
+        else
+        {
+            investida.estaInvestindo = false;
+        }
         if (impulso != null) impulso.GenerateImpulse();
+        if(Vida <= 0 || fisica.linearVelocityX <= 1f)
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void ApplyModifiers(float speedMod, float heightMod)
+    {
+        Vector2 currentVelocity = fisica.linearVelocity;
+        currentVelocity.x *= speedMod; 
+        fisica.linearVelocity = currentVelocity;
+
+        if (heightMod != 0)
+        {
+            fisica.AddForce(new Vector2(0, heightMod), ForceMode2D.Impulse);
+        }
     }
 
     public void DestroyBall()

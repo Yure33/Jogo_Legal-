@@ -5,6 +5,7 @@ public class mouseScript : MonoBehaviour
 {
     Transform tf;
     [SerializeField] float Z_Value;
+    public ParticleSystem particulaSpawn;
     public bool IsPressing = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
