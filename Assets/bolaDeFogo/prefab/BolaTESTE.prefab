@@ -141,10 +141,11 @@ MonoBehaviour:
   Vida: 100
   PerdaChao: 25
   fisica: {fileID: 8453591801376977426}
-  qntPerIndex: 000000000000000000000000
+  qntPerIndex: 000000000000000000000000000000000000000000000000
   impulso: {fileID: -5886632337718104361}
   investida: {fileID: -7787145341231066702}
   particulaHIT: {fileID: 1654711847847642751}
+  data: {fileID: 11400000, guid: 7867ab103a344894d819f74963d8f20d, type: 2}
   Direction: {x: 0, y: 0}
   Velocity: 10
 --- !u!114 &-7787145341231066702

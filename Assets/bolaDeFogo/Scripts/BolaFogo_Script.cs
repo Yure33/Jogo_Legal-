@@ -12,13 +12,16 @@ public class BolaFogo_Script : MonoBehaviour
     [SerializeField] CinemachineImpulseSource impulso;
     [SerializeField] InvestidaScript investida;
     [SerializeField] ParticleSystem particulaHIT;
+    [SerializeField] BolaFogoSO data;
     public Vector2 Direction;
     public float Velocity = 1;
     float VelocidadeAntY;
     
     void Start()
     {
-        fisica.AddForce(Direction*Velocity, ForceMode2D.Impulse);
+        qntPerIndex = new int[6];
+        Vida *= data.multiplicadorTamanho;
+        fisica.AddForce(data.multiplicadorVelocidade * Velocity * Direction, ForceMode2D.Impulse);
         impulso.GenerateImpulse();
     }
     void FixedUpdate()
@@ -90,6 +93,11 @@ public class BolaFogo_Script : MonoBehaviour
         }
     }
 
+    public void IncreasePoints(int index)
+    {
+        qntPerIndex[index]++;
+    }
+
     public void DestroyBall()
     {
         Destroy(this.gameObject);
@@ -115,6 +123,7 @@ public class BolaFogo_Script : MonoBehaviour
 
     void OnDestroy()
     {
+        GameObject.Find("HUD").GetComponent<HUD_Points_Script>().IndexQnt = qntPerIndex;
         fimDePartida?.Invoke();
     }
 }
