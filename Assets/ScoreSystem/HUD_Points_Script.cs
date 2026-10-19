@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 public class HUD_Points_Script : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI txtDistance, txtScore, txtSpecs;
@@ -37,6 +38,13 @@ public class HUD_Points_Script : MonoBehaviour
     {
         BolaFogo_Script.fimDePartida -= ShowEndHUD;
         Obstacle.OnGetPoints -= UpdateScore;
+    }
+
+    public void OnExit()
+    {
+        DOTween.KillAll();
+        Debug.Log("Saindo...");
+        Application.Quit();
     }
 
     void Start()
@@ -130,6 +138,10 @@ public class HUD_Points_Script : MonoBehaviour
         }
         txtSpecs.text += "\n";
         txtSpecs.text += "Total: " + points;
+        yield return new WaitForSecondsRealtime(0.3f);
+        txtSpecs.text += "\n";
+        txtSpecs.text += "Learning Points: " + points;
+        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money")+points);
         yield return new WaitUntil(() => 
             podePassar
         );
