@@ -46,6 +46,12 @@ public class HUD_Points_Script : MonoBehaviour
         Debug.Log("Saindo...");
         Application.Quit();
     }
+    public void OnExitWeb()
+    {
+        DOTween.KillAll();
+        Debug.Log("Saindo...");
+        SceneManager.LoadScene(0);
+    }
 
     void Start()
     {

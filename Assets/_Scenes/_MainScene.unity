@@ -9505,7 +9505,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1718391901}
         m_TargetAssemblyTypeName: HUD_Points_Script, Assembly-CSharp
-        m_MethodName: OnExit
+        m_MethodName: OnExitWeb
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15789,7 +15789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1335141491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17748,7 +17748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TESTE
+  m_text: 300
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9eea1905040957443affb3f878b88ca9, type: 2}
   m_sharedMaterial: {fileID: 8985783611077088182, guid: 9eea1905040957443affb3f878b88ca9, type: 2}
