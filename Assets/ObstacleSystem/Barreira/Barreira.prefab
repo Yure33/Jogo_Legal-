@@ -143,9 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b4852376c0aab82814792335139c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
-  dataObstacle: {fileID: 11400000, guid: cebc5332d10ff1e4b80981923369999e, type: 2}
+  data: {fileID: 11400000, guid: 6a7b251809aaf8249b780bf5b283a5a2, type: 2}
   _ball: {fileID: 0}
-  _idData: 4
 --- !u!95 &8924975131768196510
 Animator:
   serializedVersion: 7

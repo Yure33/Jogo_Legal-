@@ -9,7 +9,7 @@ public class GlueCodeShopFireBall : MonoBehaviour
     {
         if(dadosBF != null)
         {
-            dadosBF.ResetarInicial();
+            //dadosBF.ResetarInicial();
         }
     }
 
