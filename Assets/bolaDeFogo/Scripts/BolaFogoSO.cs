@@ -4,10 +4,10 @@ using UnityEngine;
 public class BolaFogoSO: ScriptableObject
 {
     public float multiplicadorVelocidade = 1f;
-    public int multiplicadorTamanho = 1;
+    public float multiplicadorTamanho = 1;
     public float dinheiroBonus = 1f;
 
-    public void ResetarInicial()
+    public void OnDisable()
     {
         multiplicadorVelocidade = 1f;
         multiplicadorTamanho = 1;

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ded3073f263d2648ac7e792916e9ac6, type: 3}
   m_Name: BolaDeFogo
   m_EditorClassIdentifier: Assembly-CSharp::BolaFogoSO
-  multiplicadorVelocidade: 1
-  multiplicadorTamanho: 1
+  multiplicadorVelocidade: 1.25
+  multiplicadorTamanho: 1.4
   dinheiroBonus: 1

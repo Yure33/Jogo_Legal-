@@ -28,11 +28,6 @@ public class ShopUI : MonoBehaviour
                 //"amarra" a chamada do evento ao clique do botao
                 EventBusShop.DispararOnTryShop(item.dadosUpgrade);
             });
-
-            TMP_Text[] textos = item.botao.GetComponentsInChildren<TMP_Text>();
-            foreach(TMP_Text t in textos) {
-                t.raycastTarget = false;
-            }
         }
     }
 

@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b4852376c0aab82814792335139c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
-  dataObstacle: {fileID: 11400000, guid: cebc5332d10ff1e4b80981923369999e, type: 2}
+  data: {fileID: 11400000, guid: 98f450f2b095be44aacd2c0139afe0d9, type: 2}
   _ball: {fileID: 0}
   _idData: 5
 --- !u!114 &8384895807904483951
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b4852376c0aab82814792335139c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
-  dataObstacle: {fileID: 11400000, guid: cebc5332d10ff1e4b80981923369999e, type: 2}
+  data: {fileID: 11400000, guid: 7392fd878e980ba44b8e5950808c9afb, type: 2}
   _ball: {fileID: 0}
   _idData: 0
 --- !u!61 &1004353927731791051
