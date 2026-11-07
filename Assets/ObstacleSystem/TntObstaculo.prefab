@@ -141,7 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   data: {fileID: 11400000, guid: 98f450f2b095be44aacd2c0139afe0d9, type: 2}
   _ball: {fileID: 0}
-  _idData: 5
 --- !u!114 &8384895807904483951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134e9c58c408e3445b2c63e2081341b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SupportEntity
+  tnt: {fileID: 8393063146100118087}
 --- !u!61 &9040284598661359028
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -309,7 +309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   data: {fileID: 11400000, guid: 7392fd878e980ba44b8e5950808c9afb, type: 2}
   _ball: {fileID: 0}
-  _idData: 0
 --- !u!61 &1004353927731791051
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -368,6 +367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d081ade9d7b3df5439781fc6bee0d5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TntFall
+  _support: {fileID: 8384895807904483951}
+  tntAnimacao: {fileID: 7900110703093755869, guid: 68e6c2440f24843489951b028bea2e78, type: 3}
 --- !u!50 &337894722349298612
 Rigidbody2D:
   serializedVersion: 5
@@ -376,14 +377,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8536342015355374854}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -394,4 +395,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5

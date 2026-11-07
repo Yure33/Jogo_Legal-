@@ -1,5 +1,6 @@
     using System;
-    using UnityEngine;
+using Unity.VisualScripting;
+using UnityEngine;
 
     public class Obstacle : MonoBehaviour
     {
@@ -32,7 +33,7 @@
                 {
                     Instantiate(data.vfxDestruicaoPrefab, transform.position, Quaternion.identity);
                 }
-
+                
                 Destroy(gameObject);
             }
         }
