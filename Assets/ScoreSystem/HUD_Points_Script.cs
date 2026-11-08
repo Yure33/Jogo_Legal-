@@ -31,12 +31,12 @@ public class HUD_Points_Script : MonoBehaviour
     
     void OnEnable()
     {
-        BolaFogo_Script.fimDePartida += ShowEndHUD;
+        BolaFogo_Script.FimDePartida += ShowEndHUD;
         Obstacle.OnGetPoints += UpdateScore;
     }
     void OnDisable()
     {
-        BolaFogo_Script.fimDePartida -= ShowEndHUD;
+        BolaFogo_Script.FimDePartida -= ShowEndHUD;
         Obstacle.OnGetPoints -= UpdateScore;
     }
 

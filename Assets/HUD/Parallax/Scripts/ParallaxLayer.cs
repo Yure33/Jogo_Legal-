@@ -26,17 +26,18 @@ public class RawImageParallax : MonoBehaviour
     // Event function
     void LateUpdate()
     {
-        float delta = cameraTransform.position.x * (1 - parallaxFactor);
-        float distance = cameraTransform.position.x * parallaxFactor;
+        float camX = cameraTransform.position.x;
+        float delta = camX * (1 - parallaxFactor);
+        float distance = camX * parallaxFactor;
         transform.position = new Vector3(positionX + distance, transform.position.y, transform.position.z);
 
-        if (delta > positionX + lenght)
-        {
+        // margem baseada no zoom atual
+        float halfVisible = Camera.main.orthographicSize * Camera.main.aspect;
+
+        // while, para não falhar em movimentos rápidos
+        while (delta > positionX + lenght - halfVisible)
             positionX += lenght;
-        }
-        else if (delta < positionX - lenght)
-        {
+        while (delta < positionX - lenght + halfVisible)
             positionX -= lenght;
-        }
     }
 }

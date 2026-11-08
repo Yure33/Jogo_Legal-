@@ -17,15 +17,8 @@ public class ObstaculoNewSO : ScriptableObject
 
     public bool destroyInTouch;
 
-    [Header("Efeitos Fisicos")]
-    [Header("Efeitos Físicos (Colisão Sólida - Parede, TNT)")]
-    public float damage;
-
-    public float velMinToBreak;
-
-    public float repulseForce;
-
-    public float slowFactor;
+    [Header("Balanceamento")]
+    public Vector2 velocidadeMinima_AoColidir;
 
     [Header("Efeitos Visuais")]
     public GameObject vfxDestruicaoPrefab;

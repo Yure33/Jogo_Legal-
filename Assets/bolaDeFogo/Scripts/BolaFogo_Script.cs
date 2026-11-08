@@ -1,40 +1,49 @@
+// SISTEMA DE MOVIMENTO DA BOLA DE FOGO
+// SISTEMA DE DANO E MORTE DA BOLA DE FOGO
 using System;
+using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class BolaFogo_Script : MonoBehaviour
 {
-    public static event Action fimDePartida;
-    public float Vida = 100;
-    [SerializeField] int PerdaChao;
+    public static event Action FimDePartida; // EVENTO SIGNIFICANDO QUE A BOLA DE FOGO MORREU
+    [Header("Referencias Essenciais")]
     [SerializeField] Rigidbody2D fisica;
-    [SerializeField] int[] qntPerIndex;
+    [SerializeField] int[] qntPerIndex; // QNT DE OBSTACULOS DESTRUIDOS
     [SerializeField] CinemachineImpulseSource impulso;
     [SerializeField] InvestidaScript investida;
     [SerializeField] ParticleSystem particulaHIT;
     [SerializeField] BolaFogoSO data;
-    public Vector2 Direction;
+    [HideInInspector] public Vector2 Direction;
+    [Header("Balanceamento")]
+    [SerializeField] Vector2 MaxVelocity;
+    Tween tween;
+    float defaultFixedTime;
     public float Velocity = 1;
-    float VelocidadeAntY;
     
     void Start()
     {
+        // SALVAR FIXED TIME UPDATE
+        defaultFixedTime = Time.fixedDeltaTime;
+        // DEFINIR OBJETOS DESTRUIDOS COMO 0
         qntPerIndex = new int[6];
-        Vida *= data.multiplicadorTamanho;
+        // APLICAÇÃO DO IMPULSO NA DIREÇÃO OBTIDA
         fisica.AddForce(data.multiplicadorVelocidade * Velocity * Direction, ForceMode2D.Impulse);
         impulso.GenerateImpulse();
     }
     void FixedUpdate()
     {
-        if(fisica.linearVelocity.magnitude > 0)
+        if(fisica.linearVelocity.magnitude > 0.5f)
         {
+            // GIRAR BOLA DE FOGO PARA A DIREÇÃO QUE ESTÁ ANDANDO
             float ang = Mathf.Atan2(fisica.linearVelocity.y, fisica.linearVelocity.x)* Mathf.Rad2Deg;
             fisica.MoveRotation(ang);
         }
-
-        if(fisica.linearVelocityX < 0.2f)
+        else
         {
-            ReciveDamage(Vida+50);
+            //BOLA MORREU
+            Destroy(gameObject);
         }
     }
 
@@ -43,87 +52,94 @@ public class BolaFogo_Script : MonoBehaviour
         Debug.Log("Bati");
         if(cool.gameObject.CompareTag("Ground"))
         {
+            // TOCAS SOM
             AudioManager.instance.PlaySound("BolaBate");
             if(investida.estaInvestindo)
             {
-                fisica.linearVelocityX /= 1.05f;
-                fisica.AddForce(2 * Mathf.Abs(fisica.linearVelocityX*1.5f) * Vector2.up, ForceMode2D.Impulse);
+                // ZERAR FORÇAS
+                float velX = fisica.linearVelocityX;
+                fisica.linearVelocity = Vector2.zero;
+                // TROCAR VELOCIDADE Y POR X
+                fisica.AddForce(new Vector2(Mathf.Abs(cool.relativeVelocity.y*0.4f), velX*0.7f), ForceMode2D.Impulse);
             }
             else
             {
-                fisica.linearVelocityX /= 1.25f;
-                fisica.AddForce(2 * Mathf.Abs(fisica.linearVelocityX) * Vector2.up, ForceMode2D.Impulse);
+                // REDUZIR VELOCIDADE X
+                fisica.linearVelocityX *= 0.4f;
+                // REZETAR VELOCIDADE Y E LANÇAR PARA CIMA COM VELOCIDADE MENOR
+                fisica.linearVelocityY = 0;
+                fisica.AddForce(Mathf.Abs(cool.relativeVelocity.y*0.7f) * Vector2.up, ForceMode2D.Impulse);
             }
-
-            ReciveDamage(PerdaChao);
+            // PARAR INVESTIDA (e tambem dar efeito de Toing)
+            investida.PararCiclo();
+            // REDUZIR DANO
+            ReciveDamage();
         }
     }
 
-    public void ReciveDamage(float damage)
+    public void ReciveDamage()
     {
+        //TOCAR PARTICULA DE HIT
         if(particulaHIT.isEmitting)
         {
             particulaHIT.Stop();
         }
         particulaHIT.Play();
-        
-        if(!investida.estaInvestindo)
-        {
-            Vida -= damage;
-        }
-        else
-        {
-            investida.estaInvestindo = false;
-        }
+
+        // APLICAR TREMULAÇÃO NA CAMERA
         if (impulso != null) impulso.GenerateImpulse();
-        if(Vida <= 0 || fisica.linearVelocityX <= 1f)
+        // SE LENTO DEMAIS, DESTRUIR BOLA
+        if(fisica.linearVelocityX <= 1f)
         {
             Destroy(gameObject);
         }
     }
-    public void ApplyModifiers(float speedMod, float heightMod)
+    public void ApplyModifiers(float speedMod, float heightMod, Vector2 velMinima)
     {
-        Vector2 currentVelocity = fisica.linearVelocity;
-        currentVelocity.x *= speedMod; 
-        fisica.linearVelocity = currentVelocity;
+        // EFEITO DE DESACELERAÇÃO PERFORMÁTICO SE HOUVER GANHO DE VELOCIDADE
+        if(speedMod >= 1 || heightMod >= 1)
+        {
+            tween?.Kill();
+            tween = DOVirtual.Float(0.1f, 1f, 1f, (v) =>
+            {
+                Time.timeScale = v;
+                Time.fixedDeltaTime = defaultFixedTime*v;
+            }).SetUpdate(true).SetEase(Ease.OutSine);
+        }
+        // INFORMAR ERRO DE MAXIMOS E MINIMOS
+        if(MaxVelocity == Vector2.zero)
+        {
+            Debug.LogError("Velocidade maxima não definida! (Verifique no prefab Bola de Fogo)");
+        }
+        // APLICAR GANHO DE VELOCIDADE X
+        fisica.linearVelocityX = Mathf.Clamp(fisica.linearVelocityX*speedMod, velMinima.x, MaxVelocity.x);
+        Debug.Log(fisica.linearVelocityX);
 
+        // APLICAR GANHO DE VELOCIDADE Y
         if (heightMod != 0)
         {
-            fisica.AddForce(new Vector2(0, heightMod), ForceMode2D.Impulse);
+            // PARAR INVESTIDA (e tambem dar efeito de Toing)
+            investida.PararCiclo();
+            // ZERAR VELOCIDADE Y
+            float velY = Mathf.Abs(fisica.linearVelocityY);
+            fisica.linearVelocityY = 0;
+            // APLICAR IMPULSO PARA CIMA
+            fisica.AddForce(new Vector2(0, velY*heightMod), ForceMode2D.Impulse);
+            Debug.Log(velY*heightMod);
+            fisica.linearVelocityY = Mathf.Clamp(fisica.linearVelocityY, velMinima.y, MaxVelocity.y);
         }
     }
 
     public void IncreasePoints(int index)
     {
+        // AUMENTAR A QUANTIDADE DO OBSTACULO DE ÍNDICE 'INDEX'
         qntPerIndex[index]++;
-    }
-
-    public void DestroyBall()
-    {
-        Destroy(this.gameObject);
-    }
-
-    public void SlowDown(float slowFactor)
-    {
-        fisica.linearVelocity *= slowFactor;
-    }
-
-    public void Repulse(Vector2 collisionNormal, float repulseForce)
-    {
-        Vector2 directionReflected = Vector2.Reflect(fisica.linearVelocity.normalized, collisionNormal);
-        fisica.linearVelocity = Vector2.zero;
-        fisica.AddForce(directionReflected * repulseForce, ForceMode2D.Impulse);
-    }
-
-    public void Stop()
-    {
-        fisica.linearVelocity = Vector2.zero;
-        fisica.angularVelocity = 0f;
     }
 
     void OnDestroy()
     {
+        tween?.Kill();
         GameObject.Find("HUD").GetComponent<HUD_Points_Script>().IndexQnt = qntPerIndex;
-        fimDePartida?.Invoke();
+        FimDePartida?.Invoke();
     }
 }

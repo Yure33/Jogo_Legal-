@@ -15,12 +15,9 @@ MonoBehaviour:
   nome: TNT
   points: 100
   indexObstacle: 4
-  velocityModifier: 0.75
-  heightModifier: 9
+  velocityModifier: 2
+  heightModifier: 3
   destroyInTouch: 1
-  damage: 0
-  velMinToBreak: 0
-  repulseForce: 0
-  slowFactor: 0
+  velocidadeMinima_AoColidir: {x: 4, y: 4}
   vfxDestruicaoPrefab: {fileID: 7900110703093755869, guid: 68e6c2440f24843489951b028bea2e78, type: 3}
   soundOnHit: TntExplode
