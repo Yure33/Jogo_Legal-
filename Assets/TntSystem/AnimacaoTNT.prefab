@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8130282520203493616}
   - component: {fileID: 4590083802315277322}
   - component: {fileID: 5350562996692108938}
+  - component: {fileID: 2349135534443981960}
   m_Layer: 0
   m_Name: AnimacaoTNT
   m_TagString: Untagged
@@ -114,3 +115,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2349135534443981960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900110703093755869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc813015c632e484f8ac69d6c4601dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoDestroy

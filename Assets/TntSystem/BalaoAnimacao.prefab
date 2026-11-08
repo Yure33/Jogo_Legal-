@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5986678391906408343}
   - component: {fileID: 7120994105909364573}
   - component: {fileID: 6242756107600279286}
+  - component: {fileID: -1637382352590364569}
   m_Layer: 0
   m_Name: BalaoAnimacao
   m_TagString: Untagged
@@ -114,3 +115,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1637382352590364569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6020450183050857357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc813015c632e484f8ac69d6c4601dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoDestroy
