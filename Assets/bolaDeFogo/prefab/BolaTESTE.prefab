@@ -115,7 +115,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7b4153d4e6f927d4d8f6cce2da3908da, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -138,8 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc7648f0c57e8bf3a28b6fff557fdb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Vida: 100
-  PerdaChao: 25
   fisica: {fileID: 8453591801376977426}
   qntPerIndex: 000000000000000000000000000000000000000000000000
   impulso: {fileID: -5886632337718104361}
@@ -147,6 +145,7 @@ MonoBehaviour:
   particulaHIT: {fileID: 1654711847847642751}
   data: {fileID: 11400000, guid: 7867ab103a344894d819f74963d8f20d, type: 2}
   Direction: {x: 0, y: 0}
+  MaxVelocity: {x: 40, y: 25}
   Velocity: 10
 --- !u!114 &-7787145341231066702
 MonoBehaviour:
@@ -162,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   forca: 25
   estaInvestindo: 0
+  delayPerUse: 2
   intervaloFantasma: 0.1
   duracaoFadeFantasma: 0.3
   corFantasma: {r: 1, g: 1, b: 1, a: 0.5882353}

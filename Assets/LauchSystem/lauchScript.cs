@@ -119,6 +119,7 @@ public class lauchScript : MonoBehaviour
                 cams[0].Priority = 0;
                 cams[1].Priority = 1;
                 cams[1].Follow = bola.transform;
+                cams[1].GetComponent<DynamicZoom_Camera>().bolaDeFuego = bola.GetComponent<Rigidbody2D>();
             }else
             {
                 AudioManager.instance.StopSound("PrepararBola");

@@ -11,6 +11,8 @@ public class InvestidaScript : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spritePrincipal;
     public bool estaInvestindo = false;
+    public float delayPerUse;
+    float timedDelay = 0;
 
     [Header("Configurações do Rastro (Ghost Trail)")]
     [SerializeField] private float intervaloFantasma = 0.05f; // Tempo entre cada sprite deixado
@@ -49,12 +51,17 @@ public class InvestidaScript : MonoBehaviour
                 cronometroFantasma = 0f;
             }
         }
+        if(timedDelay >= 0 && !estaInvestindo)
+        {
+            timedDelay -= Time.deltaTime;
+        }
     }
 
     void IniciarInvestida(InputAction.CallbackContext context)
     {
-        if(!estaInvestindo)
+        if(!estaInvestindo && timedDelay < 0)
         {
+            timedDelay = delayPerUse;
             Instantiate(circulo, transform.position, Quaternion.identity);
             ComecarCiclo();
         }
@@ -84,13 +91,16 @@ public class InvestidaScript : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnComplete(() => Destroy(fantasma)); // Destrói o objeto para não poluir a cena
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    public void PararCiclo()
     {
-        // Detecta quando colidiu com o chão ou qualquer obstáculo para parar o rastro
-        if (estaInvestindo)
-        {
-            transform.DOScaleY(transform.localScale.y * 0.7f, 0.1f)
-                .SetLoops(2, LoopType.Yoyo);
-        }
+        transform.DOComplete();
+        transform.DOScale(transform.localScale * 0.8f, 0.1f).SetLoops(2, LoopType.Yoyo);
+        estaInvestindo = false;
+    }
+
+    void OnDestroy()
+    {
+        transform.DOKill();
     }
 }

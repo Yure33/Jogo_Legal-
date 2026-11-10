@@ -18,9 +18,6 @@ MonoBehaviour:
   velocityModifier: 0.5
   heightModifier: 0
   destroyInTouch: 0
-  damage: 10
-  velMinToBreak: 0
-  repulseForce: 0
-  slowFactor: 0
+  velocidadeMinima_AoColidir: {x: 0.1, y: 0.1}
   vfxDestruicaoPrefab: {fileID: 0}
   soundOnHit: 
