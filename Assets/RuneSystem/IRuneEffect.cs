@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IRuneEffect
 {
-    void ExecuteEffect(GameObject bolaDeFogo);
+    void ExecuteEffect(BolaFogo_Script bolaDeFogo);
 }

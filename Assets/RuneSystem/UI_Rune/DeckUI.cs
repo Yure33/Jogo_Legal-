@@ -4,9 +4,20 @@ using UnityEngine;
 public class DeckUI : MonoBehaviour
 {
     [SerializeField] private DeckManager deck;
-    [SerializeField] private BolaFogo_Script bolaDeFogo;
     [SerializeField] private GameObject prefabRuna; //item(objeto que contem o draggable item)
     [SerializeField] private Transform hud_runas;
+
+    private BolaFogo_Script bolaDeFogo;
+
+    void Awake()
+    {
+        bolaDeFogo = Object.FindAnyObjectByType<BolaFogo_Script>();
+        
+        if (bolaDeFogo == null)
+        {
+            Debug.LogError("DeckUI não encontrou a Bola de Fogo na cena!");
+        }
+    }
 
     void OnEnable()
     {
@@ -38,7 +49,7 @@ public class DeckUI : MonoBehaviour
 
             RuneObjectUI runa = novaRuna.GetComponent<RuneObjectUI>();
 
-            runa.ConfigRune(runas[i]);
+            runa.ConfigRune(runas[i], bolaDeFogo);
         }
     }
 }

@@ -6,6 +6,7 @@ public class RuneObjectUI : MonoBehaviour
 {
     private Image runeImage;
     private RuneSO runeData;
+    private BolaFogo_Script bolaDeFogo;
 
     void Awake()
     {
@@ -13,10 +14,11 @@ public class RuneObjectUI : MonoBehaviour
     }
 
     //configura runa
-    public void ConfigRune(RuneSO data)
+    public void ConfigRune(RuneSO data, BolaFogo_Script fireBall)
     {
         runeData = data;
-        
+        bolaDeFogo = fireBall;
+
         if(runeImage != null) runeImage.sprite = runeData.RuneIcon;
 
         gameObject.name = runeData.RuneName;
@@ -25,6 +27,10 @@ public class RuneObjectUI : MonoBehaviour
     //executa efeito
     public void ApplyEffect()
     {
-        GameObject rune = runeData.EfeitoPrefab;
+        GameObject runePrefab = runeData.EfeitoPrefab;
+
+        IRuneEffect rune = runePrefab.GetComponent<IRuneEffect>();
+
+        rune.ExecuteEffect(bolaDeFogo);
     }
 }

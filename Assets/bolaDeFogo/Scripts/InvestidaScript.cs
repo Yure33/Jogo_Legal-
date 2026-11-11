@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class InvestidaScript : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class InvestidaScript : MonoBehaviour
     public bool estaInvestindo = false;
     public float delayPerUse;
     float timedDelay = 0;
+
+    [SerializeField] private bool mouseOverUI = false;
 
     [Header("Configurações do Rastro (Ghost Trail)")]
     [SerializeField] private float intervaloFantasma = 0.05f; // Tempo entre cada sprite deixado
@@ -55,10 +58,20 @@ public class InvestidaScript : MonoBehaviour
         {
             timedDelay -= Time.deltaTime;
         }
+
+        if (EventSystem.current != null)
+        {
+            mouseOverUI = EventSystem.current.IsPointerOverGameObject();
+        }
     }
 
     void IniciarInvestida(InputAction.CallbackContext context)
     {
+        if (mouseOverUI)
+        {
+            return;
+        }
+
         if(!estaInvestindo && timedDelay < 0)
         {
             timedDelay = delayPerUse;

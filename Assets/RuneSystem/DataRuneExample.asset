@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc52abd68ee9dd42b3208aecba78a4f, type: 3}
-  m_Name: RuneData
+  m_Script: {fileID: 11500000, guid: 441c9751bc8366c439e5e2617b6f3190, type: 3}
+  m_Name: DataRuneExample
   m_EditorClassIdentifier: Assembly-CSharp::RuneSO
-  name: 
-  icone: {fileID: 0}
-  efeito:
-    rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  runeName: Exemplo
+  runeIcon: {fileID: 6343853939909053041, guid: b68c0a6d53f3c6044a08019a4c5aead1, type: 3}
+  efeitoPrefab: {fileID: 8087848513562598186, guid: 653e319d765ee184184082f861e01e0d, type: 3}
